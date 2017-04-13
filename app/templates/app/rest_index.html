@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,
+                                  minimum-scale=1.0,maximum-scale=1.0,
+                                  user-scalable=no" />
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css">
+  <title>게시판1</title>
+  </head>
+  <body>
+<h1 align="center">랜덤 식당</h1>
+            <ul class="nav navbar-nav navbar-right">
+              {% if not user.is_authenticated %}
+                <li><a href="{% url "signup" %}">회원가입</a></li>
+                <li><a href="{% url "login" %}?next={{ request.path }}">로그인</a></li>
+              {% else %}
+                <li><a href="{% url "profile" %}">프로필</a></li>
+                <li><a href="{% url "logout"%}?next={{ request.path }}">로그아웃</a></li>
+                <!-- ?next={{ request.path }} <- 이걸로 있었던주소로 돌아오기 -->
+              {% endif %}
+            </ul>
+
+  <ul>
+    {% for post in restaurant %}
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <p style="text-align:center;">
+            번호 : {{ post.id }}
+            식당 : {{ post.restname }}
+            위치 : {{ post.restsite }}
+          </p>
+        <center><img src="{{post.restimage.url}}" style="max_length: 100%;" /></center>
+          <p style="float: right"><small>작성자 : {{ post.author }}</small></p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </ul>
+</body>
+</html>
