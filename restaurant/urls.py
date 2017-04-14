@@ -18,8 +18,10 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf.urls.static import static
+from django.shortcuts import redirect
 
 urlpatterns = [
+    url(r'^$', lambda r: redirect('app:rest_index'),name='root'), #url 유도
     url(r'^admin/', admin.site.urls),
     url(r'^app/', include('app.urls',namespace='app')),
 ]

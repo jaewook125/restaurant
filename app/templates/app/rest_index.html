@@ -12,10 +12,15 @@
   </head>
   <body>
 <h1 align="center">랜덤 식당</h1>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="{% url "app:rest_new" %}">식당 추가!</a></li>
-        <li><a href="{% url "app:rest_edit" restaurant.id %}">식당 수정!</a></li>
-      </ul>
+
+{% if user.is_authenticated %}
+<ul class="nav navbar-nav navbar-right">
+  <li><a href="{% url "app:rest_new" %}">식당 추가!</a></li>
+  <li><a href="{% url "app:rest_edit" restaurant.id %}">식당 수정!</a></li>
+</ul>
+{% else %}
+<li>로그인 하면 식당 추가,수정 가능!</li>
+{% endif %}
             <ul class="nav navbar-nav navbar-center">
               {% if not user.is_authenticated %}
                 <li><a href="{% url "signup" %}">회원가입</a></li>

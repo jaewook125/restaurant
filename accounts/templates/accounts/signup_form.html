@@ -1,7 +1,9 @@
+{% load bootstrap3 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 <form action="" method="post">
   {% csrf_token %}
-  <table>
-    {{ form.as_table }}
-  </table>
+{% bootstrap_form form %}
   <input type="submit" />
 </form>
