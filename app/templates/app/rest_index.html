@@ -7,6 +7,8 @@
                                   user-scalable=no" />
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css">
   <title>게시판1</title>
+
+
   </head>
   <body>
 <h1 align="center">랜덤 식당</h1>
@@ -22,6 +24,7 @@
             </ul>
 
   <ul>
+
     {% for post in restaurant %}
     <div class="container">
       <div class="row">
@@ -38,5 +41,14 @@
     </div>
     {% endfor %}
   </ul>
+  <button onclick="myFunction()">Try it</button>
+
+  <p id="post"></p>
+  <script>
+  function myFunction() {
+      var x = Math.floor((Math.random() * 20) + 1);
+      document.getElementById("post").innerHTML = x;
+  }
+  </script>
 </body>
 </html>
