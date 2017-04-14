@@ -12,7 +12,11 @@
   </head>
   <body>
 <h1 align="center">랜덤 식당</h1>
-            <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url "app:rest_new" %}">식당 추가!</a></li>
+        <li><a href="{% url "app:rest_edit" restaurant.id %}">식당 수정!</a></li>
+      </ul>
+            <ul class="nav navbar-nav navbar-center">
               {% if not user.is_authenticated %}
                 <li><a href="{% url "signup" %}">회원가입</a></li>
                 <li><a href="{% url "login" %}?next={{ request.path }}">로그인</a></li>
@@ -24,31 +28,19 @@
             </ul>
 
   <ul>
-
-    {% for post in restaurant %}
     <div class="container">
       <div class="row">
         <div class="col-sm-12">
-          <p style="text-align:center;">
-            번호 : {{ post.id }}
-            식당 : {{ post.restname }}
-            위치 : {{ post.restsite }}
-          </p>
-        <center><img src="{{post.restimage.url}}" style="max_length: 100%;" /></center>
-          <p style="float: right"><small>작성자 : {{ post.author }}</small></p>
+          <p style="text-align:center;"></p>
+            <p style="float: right"><small>작성자 : {{ restaurant.author }}</small></p>
+            <p>식당 : {{ restaurant.restname }}</p>
+              <center><img src="{{restaurant.restimage.url}}" style="max_length: 100%;" /></center>
+            <p>위치 : {{ restaurant.restsite }}</p>
         </div>
       </div>
     </div>
-    {% endfor %}
-  </ul>
-  <button onclick="myFunction()">Try it</button>
 
-  <p id="post"></p>
-  <script>
-  function myFunction() {
-      var x = Math.floor((Math.random() * 20) + 1);
-      document.getElementById("post").innerHTML = x;
-  }
-  </script>
+  </ul>
+        <h4 align="center"><a href="{% url "app:rest_index" %}">다른 식당!</a></h4>
 </body>
 </html>
