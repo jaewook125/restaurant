@@ -1,51 +1,62 @@
-<!doctype html>
-<html>
-  <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0,
-                                  minimum-scale=1.0,maximum-scale=1.0,
-                                  user-scalable=no" />
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css">
-  <title>게시판1</title>
+{% extends "app/layout.html" %}
 
-
-  </head>
-  <body>
-<h1 align="center">랜덤 식당</h1>
-
+{% block content %}
 {% if user.is_authenticated %}
-<ul class="nav navbar-nav navbar-right">
-  <li><a href="{% url "app:rest_new" %}">식당 추가!</a></li>
-  <li><a href="{% url "app:rest_edit" restaurant.id %}">식당 수정!</a></li>
-</ul>
-{% else %}
-<li>로그인 하면 식당 추가,수정 가능!</li>
-{% endif %}
-            <ul class="nav navbar-nav navbar-center">
-              {% if not user.is_authenticated %}
-                <li><a href="{% url "signup" %}">회원가입</a></li>
-                <li><a href="{% url "login" %}?next={{ request.path }}">로그인</a></li>
-              {% else %}
-                <li><a href="{% url "profile" %}">프로필</a></li>
-                <li><a href="{% url "logout"%}?next={{ request.path }}">로그아웃</a></li>
-                <!-- ?next={{ request.path }} <- 이걸로 있었던주소로 돌아오기 -->
-              {% endif %}
-            </ul>
 
-  <ul>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12">
-          <p style="text-align:center;"></p>
-            <p style="float: right"><small>작성자 : {{ restaurant.author }}</small></p>
-            <p>식당 : {{ restaurant.restname }}</p>
-              <center><img src="{{restaurant.restimage.url}}" style="max_length: 100%;" /></center>
-            <p>위치 : {{ restaurant.restsite }}</p>
+<div data-role="page">
+    <div data-role="header">
+      <h1>랜덤 식당</h1>
+        <div data-role="navbar">
+      <ul>
+
+        <li><a href="{% url "app:rest_new" %}">식당 추가!</a></li>
+        <li><a href="{% url "app:rest_edit" restaurant.id %}">식당 수정!</a></li>
+
+      </ul>
+
+      {% else %}
+        <h3>회원가입시 식당 추가,수정 가능!</h3>
+      {% endif %}
+
+      <ul>
+
+      {% if not user.is_authenticated %}
+        <div data-role="navbar">
+          <li><a href="{% url "signup" %}">회원가입</a></li>
+          <li><a href="{% url "login" %}?next={{ request.path }}">로그인</a></li>
         </div>
+      {% else %}
+        <li><a href="{% url "profile" %}">프로필</a></li>
+        <li><a href="{% url "logout"%}?next={{ request.path }}">로그아웃</a></li>
+      <!-- ?next={{ request.path }} <- 이걸로 있었던주소로 돌아오기 -->
+      {% endif %}
+
+      </ul>
+  </div>
+</div>
+
+
+<div data-role="main" class="ui-content">
+<ul>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <p style="text-align:center;"></p>
+          <p style="float: right"><small>작성자 : {{ restaurant.author }}</small></p>
+          <p>식당 : {{ restaurant.restname }}</p>
+            <center><img src="{{restaurant.restimage.url}}"
+              alt="Cinque Terre"
+              class="img-responsive img-rounded"
+              style="max_length: 100%;"
+              id=image/></center>
+          <p>위치 : {{ restaurant.restsite }}</p>
       </div>
     </div>
+  </div>
 
-  </ul>
-        <h4 align="center"><a href="{% url "app:rest_index" %}">다른 식당!</a></h4>
-</body>
-</html>
+</ul>
+</div>
+
+<form><input type="button" value="다른 식당 검색!" onClick="window.location.reload()"></form>
+
+{% endblock %}

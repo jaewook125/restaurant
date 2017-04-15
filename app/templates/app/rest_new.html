@@ -1,9 +1,30 @@
-{% load bootstrap3 %}
+{% extends "app/layout.html" %}
 
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-<form action="" method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-{% bootstrap_form form %}
-  <input type="submit" class="btn btn-primary btn-lg" />
+{% block content %}
+<form action="" method="post" class="form-horizontal" enctype="multipart/form-data">
+<legend>새로운 식당 추가,삭제</legend>
+{% csrf_token %}
+<div class="ui-field-contain">
+  <label for="author">작성자 아이디</label>
+  <input type="text" name="author" id="author">
+  <label for="fullname">식당 이름</label>
+  <input type="text" name="fullname" id="fullname">
+  <label for="bday">식당 사진 업로드</label>
+  <input type="date" name="bday" id="bday">
+  <label for="email">식당 주소</label>
+  <input type="email" name="email" id="email" placeholder="ex: 서울특별시 용산구 원효로 1동 ">
+</div>
+
+
+
+<input type="submit" value="확인" />
+<a href="#" class="ui-btn" data-rel="back">취소</a>
 </form>
+
+<script>
+$(function() {
+  $('.form-group label').addClass('col-sm-2');
+  $('.form-group input, .form-group textarea').addClass('form-control');
+});
+</script>
+{% endblock %}

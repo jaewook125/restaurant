@@ -1,9 +1,41 @@
-{% load bootstrap3 %}
+{% extends "app/layout.html" %}
 
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-<form action="" method="post">
-  {% csrf_token %}
-{% bootstrap_form form %}
-  <input type="submit" />
+{% block content %}
+<form action="" method="post" class="form-horizontal" enctype="multipart/form-data">
+<legend>회원가입!</legend>
+{% csrf_token %}
+<ul>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <p style="text-align:center;"></p>
+{% for field in form.visible_fields %}
+  <div class="form-group">
+  {{ field.label_tag }}
+    <div class="col-sm-10">
+      {{ field }}
+      <p class="help-block">{{ field.help_text }}</p>
+      {% for error in field.errors %}
+      <div class="alert alert-danger">
+      {{ error }}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endfor %}
+    </div>
+  </div>
+</div>
+</ul>
+
+<input type="submit" value="누르면 회원가입!" />
+<a href="#" class="ui-btn" data-rel="back">취소</a>
 </form>
+
+<script>
+$(function() {
+  $('.form-group label').addClass('col-sm-2');
+  $('.form-group input, .form-group textarea').addClass('form-control');
+});
+</script>
+{% endblock %}
