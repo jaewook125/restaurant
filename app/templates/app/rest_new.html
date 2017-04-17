@@ -4,18 +4,29 @@
 <form action="" method="post" class="form-horizontal" enctype="multipart/form-data">
 <legend>새로운 식당 추가,삭제</legend>
 {% csrf_token %}
-<div class="ui-field-contain">
-  <label for="author">작성자 아이디</label>
-  <input type="text" name="author" id="author">
-  <label for="fullname">식당 이름</label>
-  <input type="text" name="fullname" id="fullname">
-  <label for="bday">식당 사진 업로드</label>
-  <input type="date" name="bday" id="bday">
-  <label for="email">식당 주소</label>
-  <input type="email" name="email" id="email" placeholder="ex: 서울특별시 용산구 원효로 1동 ">
+
+
+{{ form.non_field_errors }}
+<div class="fieldWrapper">
+    {{ form.author.errors }}
+    <label for="{{ form.author.id_for_label }}">작성자 아이디</label>
+    {{ user }}
 </div>
-
-
+<div class="fieldWrapper">
+    {{ form.restimage.errors }}
+    <label for="{{ form.restimage.id_for_label }}">식당 이미지 업로드</label>
+    {{ form.restimage }}
+</div>
+<div class="fieldWrapper">
+    {{ form.restname.errors }}
+    <label for="{{ form.restname.id_for_label }}">식당 이름</label>
+    {{ form.restname }}
+</div>
+<div class="fieldWrapper">
+    {{ form.restsite.errors }}
+    <label for="{{ form.restsite.id_for_label }}">식당 주소</label>
+    {{ form.restsite }}
+</div>
 
 <input type="submit" value="확인" />
 <a href="#" class="ui-btn" data-rel="back">취소</a>

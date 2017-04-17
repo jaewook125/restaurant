@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib import messages
 from .models import Restaurant
@@ -9,6 +10,7 @@ def rest_index(request):
         'restaurant':restaurant
     })
 
+@login_required
 def rest_new(request):
     if request.method == 'POST':
         form = RestForm(request.POST, request.FILES)
@@ -23,6 +25,7 @@ def rest_new(request):
         'form': form
     })
 
+@login_required
 def rest_edit(request, id):
     restaurant = get_object_or_404(Restaurant, id=id)
     if request.method == 'POST':
