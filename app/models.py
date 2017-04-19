@@ -9,11 +9,11 @@ from imagekit.processors import Thumbnail
 
 class Restaurant(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
-    restimage = ProcessedImageField(blank=True, upload_to='app/restimage/%Y/%m/%d',
-            processors=[Thumbnail(300, 250)],
+    restimage = ProcessedImageField(blank=False,
+            upload_to='app/restimage/%Y/%m/%d',
             format='JPEG',
             options={'quality': 80})
-    restname = models.CharField(max_length=20)
+    restname = models.CharField(max_length=50)
     restsite = models.CharField(max_length=200)
 
     def __str__(self):

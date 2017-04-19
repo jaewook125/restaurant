@@ -1,29 +1,11 @@
-{% extends "app/layout.html" %}
 
-{% block content %}
-<form action="" method="post" class="form-horizontal" enctype="multipart/form-data">
-<legend>새로운 식당 추가,삭제</legend>
-{% csrf_token %}
-
-
-<div class="file">
-    {{ form.restimage.errors }}
-    <label for="id_restimage">식당 이미지 업로드</label>
-    <input id="id_restimage" name="restimage" type="file" />
-</div>
-<div class="fieldWrapper">
-    {{ form.restname.errors }}
-    <label for="{{ form.restname.id_for_label }}">식당 이름</label>
-    {{ form.restname }}
-</div>
-<div class="fieldWrapper">
-    {{ form.restsite.errors }}
-    <label for="{{ form.restsite.id_for_label }}">식당 주소</label>
-    {{ form.restsite }}
-</div>
-
-<input type="submit" value="확인" />
-
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+  <table>
+        <tbody><tr><th><label for="id_restimage">Restimage:</label></th><td><input id="id_restimage" name="restimage" type="file" required=""></td></tr>
+          <tr><th><label for="id_restname">Restname:</label></th><td><input id="id_restname" maxlength="50" name="restname" type="text" required=""></td></tr>
+        <tr><th><label for="id_restsite">Restsite:</label></th><td><input id="id_restsite" maxlength="200" name="restsite" type="text" required=""></td></tr>
+    </tbody>
+  </table>
+    <input type="submit">
 </form>
-
-  {% endblock %}

@@ -33,7 +33,9 @@ def rest_edit(request, id):
     if request.method == 'POST':
         form = RestForm(request.POST, request.FILES, instance=restaurant)
         if form.is_valid():
-            restaurant = form.save()
+            restaurant = form.save(commit=False)
+            restaurant.author = request.user
+            restaurant.save()
             messages.success(request, '식당 정보를 수정했습니다.')
             #메세지 프레임워크
             return redirect(restaurant)
