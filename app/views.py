@@ -15,7 +15,9 @@ def rest_new(request):
     if request.method == 'POST':
         form = RestForm(request.POST, request.FILES)
         if form.is_valid():
-            restaurant = form.save()
+            restaurant = form.save(commit=False)
+            restaurant.author = request.user
+            restaurant.save()
             messages.success(request, '새 식당을 저장했습니다.')
             #메세지 프레임워크
             return redirect(restaurant)

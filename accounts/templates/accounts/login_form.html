@@ -1,14 +1,11 @@
-{% extends "app/layout.html" %}
+{% extends "accounts/layout.html" %}
 
 {% block content %}
-<form action="" method="post" class="form-horizontal" enctype="multipart/form-data">
+<form action="" method="post" class="form-horizontal">
 <legend>로그인</legend>
 {% csrf_token %}
 <ul>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <p style="text-align:center;"></p>
+
 {% for field in form.visible_fields %}
   <div class="form-group">
   {{ field.label_tag }}
@@ -23,19 +20,11 @@
     </div>
   </div>
 {% endfor %}
-    </div>
-  </div>
-</div>
-</ul>
 
+</ul>
 <input type="submit" value="로그인!" />
-<a href="#" class="ui-btn" data-rel="back">취소</a>
+
 </form>
 
-<script>
-$(function() {
-  $('.form-group label').addClass('col-sm-2');
-  $('.form-group input, .form-group textarea').addClass('form-control');
-});
-</script>
+
 {% endblock %}

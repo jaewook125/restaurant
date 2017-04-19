@@ -6,16 +6,10 @@
 {% csrf_token %}
 
 
-{{ form.non_field_errors }}
-<div class="fieldWrapper">
-    {{ form.author.errors }}
-    <label for="{{ form.author.id_for_label }}">작성자 아이디</label>
-    {{ user }}
-</div>
-<div class="fieldWrapper">
+<div class="file">
     {{ form.restimage.errors }}
-    <label for="{{ form.restimage.id_for_label }}">식당 이미지 업로드</label>
-    {{ form.restimage }}
+    <label for="id_restimage">식당 이미지 업로드</label>
+    <input id="id_restimage" name="restimage" type="file" />
 </div>
 <div class="fieldWrapper">
     {{ form.restname.errors }}
@@ -29,13 +23,7 @@
 </div>
 
 <input type="submit" value="확인" />
-<a href="#" class="ui-btn" data-rel="back">취소</a>
+
 </form>
 
-<script>
-$(function() {
-  $('.form-group label').addClass('col-sm-2');
-  $('.form-group input, .form-group textarea').addClass('form-control');
-});
-</script>
-{% endblock %}
+  {% endblock %}

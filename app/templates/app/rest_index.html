@@ -1,60 +1,68 @@
 {% extends "app/layout.html" %}
+{% load imagekit %}
 
 {% block content %}
 {% if user.is_authenticated %}
 
-<div data-role="page">
     <div data-role="header">
       <h1>랜덤 식당</h1>
         <div data-role="navbar">
       <ul>
 
         <li><a href="{% url "app:rest_new" %}">식당 추가!</a></li>
+        {% if restaurant.author == user %}
         <li><a href="{% url "app:rest_edit" restaurant.id %}">식당 수정!</a></li>
-
+        {% endif %}
       </ul>
 
-      {% else %}
-        <h3>회원가입시 식당 추가,수정 가능!</h3>
-      {% endif %}
+{% endif %}
 
-      <ul>
+
 
       {% if not user.is_authenticated %}
         <div data-role="navbar">
-          <li><a href="{% url "signup" %}">회원가입</a></li>
-          <li><a href="{% url "login" %}?next={{ request.path }}">로그인</a></li>
+          <a href="{% url "signup" %}">회원가입</a>
+          <a href="{% url "login" %}?next={{ request.path }}">로그인</a>
+          <p>회원가입시 식당 추가,수정 가능!</p>
         </div>
       {% else %}
+      <ul>
         <li><a href="{% url "profile" %}">프로필</a></li>
-        <li><a href="{% url "logout"%}?next={{ request.path }}">로그아웃</a></li>
-      <!-- ?next={{ request.path }} <- 이걸로 있었던주소로 돌아오기 -->
-      {% endif %}
-
+        <li><a href="{% url "logout" %}?next={{ request.path }}">로그아웃</a></li>
       </ul>
+      <!-- ?next={{ request.path }} <- 이걸로 있었던주소로 돌아오기 -->
+
+      {% endif %}
   </div>
 </div>
 
-
 <div data-role="main" class="ui-content">
-<ul>
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
         <p style="text-align:center;"></p>
           <p style="float: right"><small>작성자 : {{ restaurant.author }}</small></p>
-          <p>식당 : {{ restaurant.restname }}</p>
+
+
+          <p>식당 이미지 : {{ restaurant.restname }}</p>
+
+          {% if restaurant.restimage %}
+            {% thumbnail "250x250" restaurant.restimage as thumb %}
             <center><img src="{{restaurant.restimage.url}}"
+              width="{{ thumb.width }}" height="{{ thumb.height }}"
               alt="Cinque Terre"
               class="img-responsive img-rounded"
               style="max_length: 100%;"
               id=image/></center>
+          {% else %}
+            이미지가 없네요! 업로드 해주세요!
+          {% endif %}
+
+
           <p>위치 : {{ restaurant.restsite }}</p>
       </div>
     </div>
   </div>
-
-</ul>
 </div>
 
 <form><input type="button" value="다른 식당 검색!" onClick="window.location.reload()"></form>

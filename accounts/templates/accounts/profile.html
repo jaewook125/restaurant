@@ -1,4 +1,4 @@
-{% extends "app/layout.html" %}
+{% extends "accounts/layout.html" %}
 
 {% block content %}
 <div class="container">
@@ -8,13 +8,13 @@
   <h2>{{ user }}'s Profile'</h2>
   <ul>
 
-      <li>username : {{user.username}}</li>
-      <li>email : {{user.email}}</li>
-      <li>date : {{user.date_joined}}</li>
+      <li>이름 : {{user.username}}</li>
+      <li>가입날짜 : {{user.date_joined}}</li>
 
   </ul>
-  <a href="#" class="ui-btn" data-rel="back">뒤로가기</a>
-  {% endblock %}
+
+
     </div>
   </div>
 </div>
+  {% endblock %}

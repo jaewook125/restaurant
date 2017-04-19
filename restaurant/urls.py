@@ -24,11 +24,9 @@ urlpatterns = [
     url(r'^$', lambda r: redirect('app:rest_index'),name='root'), #url 유도
     url(r'^admin/', admin.site.urls),
     url(r'^app/', include('app.urls',namespace='app')),
+    url(r'^accounts/', include('accounts.urls')),
 ]
 
-urlpatterns += [
-        url(r'^accounts/', include('accounts.urls')),
-]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 #어드민에서 사진 보기, 미디어 파일 서빙시키기
