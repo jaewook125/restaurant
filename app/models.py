@@ -9,7 +9,8 @@ from imagekit.processors import Thumbnail
 
 class Restaurant(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
-    restimage = ProcessedImageField(blank=False,
+    restimage = ProcessedImageField(blank=True,
+            processors=[Thumbnail(350, 350)],
             upload_to='app/restimage/%Y/%m/%d',
             format='JPEG',
             options={'quality': 80})

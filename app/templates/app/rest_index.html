@@ -2,39 +2,6 @@
 {% load imagekit %}
 
 {% block content %}
-{% if user.is_authenticated %}
-
-
-      <h1>랜덤 식당</h1>
-
-      <ul>
-
-        <li><a href="{% url "app:rest_new" %}">식당 추가!</a></li>
-        {% if restaurant.author == user %}
-        <li><a href="{% url "app:rest_edit" restaurant.id %}">식당 수정!</a></li>
-        {% endif %}
-      </ul>
-
-{% endif %}
-
-
-
-      {% if not user.is_authenticated %}
-
-          <a href="{% url "signup" %}">회원가입</a>
-          <a href="{% url "login" %}?next={{ request.path }}">로그인</a>
-          <p>회원가입시 식당 추가,수정 가능!</p>
-
-      {% else %}
-      <ul>
-        <li><a href="{% url "profile" %}">프로필</a></li>
-        <li><a href="{% url "logout" %}?next={{ request.path }}">로그아웃</a></li>
-      </ul>
-      <!-- ?next={{ request.path }} <- 이걸로 있었던주소로 돌아오기 -->
-
-      {% endif %}
-
-
 
 
   <div class="container">
@@ -43,25 +10,25 @@
         <p style="text-align:center;"></p>
           <p style="float: right"><small>작성자 : {{ restaurant.author }}</small></p>
 
-
-          <p>식당 이미지 : {{ restaurant.restname }}</p>
-
+          <div>
+            <p>식당 이름! : {{ restaurant.restname }}</p>
+          </div>
           {% if restaurant.restimage %}
-            {% thumbnail "250x250" restaurant.restimage as thumb %}
-            <center><img src="{{restaurant.restimage.url}}"
+            {% thumbnail "350x350" restaurant.restimage as thumb %}
+            <center><img src="{{ thumb.url }}"
               width="{{ thumb.width }}" height="{{ thumb.height }}"
               alt="Cinque Terre"
               class="img-responsive img-rounded"
               style="max_length: 100%;"
               id=image/></center>
           {% else %}
-            이미지가 없네요! 업로드 해주세요!
+            <center>이미지가 없네요! 업로드 해주세요!</center>
           {% endif %}
 
 
-          <p>위치 : {{ restaurant.restsite }}</p>
+          <p>간략한 위치 : {{ restaurant.restsite }}</p>
           <div data-role="footer">
-          <form><input type="button" value="다른 식당 검색!" onClick="window.location.reload()"></form>
+          <form><input type="button" class="btn btn-primary btn-block" value="다른 식당 검색!" onClick="window.location.reload()"></form>
           </div>
       </div>
     </div>
