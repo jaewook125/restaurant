@@ -4,9 +4,9 @@
 {% block content %}
 {% if user.is_authenticated %}
 
-    <div data-role="header">
+
       <h1>랜덤 식당</h1>
-        <div data-role="navbar">
+
       <ul>
 
         <li><a href="{% url "app:rest_new" %}">식당 추가!</a></li>
@@ -20,11 +20,11 @@
 
 
       {% if not user.is_authenticated %}
-        <div data-role="navbar">
+
           <a href="{% url "signup" %}">회원가입</a>
           <a href="{% url "login" %}?next={{ request.path }}">로그인</a>
           <p>회원가입시 식당 추가,수정 가능!</p>
-        </div>
+
       {% else %}
       <ul>
         <li><a href="{% url "profile" %}">프로필</a></li>
@@ -36,7 +36,7 @@
 
 
 
-<div data-role="main" class="ui-content">
+
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
@@ -66,8 +66,6 @@
       </div>
     </div>
   </div>
-</div>
-</div>
-</div>
+
 
 {% endblock %}

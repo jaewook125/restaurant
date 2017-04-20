@@ -1,11 +1,27 @@
+{% extends "app/layout.html" %}
 
-<form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-  <table>
-        <tbody><tr><th><label for="id_restimage">Restimage:</label></th><td><input id="id_restimage" name="restimage" type="file" required=""></td></tr>
-          <tr><th><label for="id_restname">Restname:</label></th><td><input id="id_restname" maxlength="50" name="restname" type="text" required=""></td></tr>
-        <tr><th><label for="id_restsite">Restsite:</label></th><td><input id="id_restsite" maxlength="200" name="restsite" type="text" required=""></td></tr>
-    </tbody>
-  </table>
-    <input type="submit">
-</form>
+{% block content %}
+
+<div class="container">
+    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="{{ form.restimage.id_for_label }}" class="control-label col-sm-2">Restname:</label>
+        {{ form.restimage }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.restname.id_for_label }}" class="control-label col-sm-2">Restname:</label>
+        {{ form.restname }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.restsite.id_for_label }}" class="control-label col-sm-2">Restname:</label>
+        {{ form.restsite }}
+      </div>
+      <input type="submit">
+    </form>
+</div>
+
+</body>
+</html>
+
+{% endblock %}
