@@ -1,4 +1,5 @@
 <!doctype html>
+{% load staticfiles %}
 {% load imagekit %}
 <html>
   <head>
@@ -9,6 +10,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
 
   <title>랜덤 식당</title>
 
@@ -31,19 +34,21 @@
 
         {% if restaurant.author == user %}
           <li><a href="{% url "app:rest_edit" restaurant.id %}">식당 수정!</a></li>
+          <li><a href="{% url "app:rest_delete" restaurant.id %}">식당 삭제</a></li>
         {% endif %}
 
 {% endif %}
 
     {% if not user.is_authenticated %}
       <ul class="nav navbar-nav navbar-right">
-          <li><a href="{% url "signup" %}"
+          <li><a href="{% url "signup" %}?next={% url "login" %}"
                  data-toggle="tooltip" title="회원가입시 식당 추가,수정 가능!">
           <span class="glyphicon glyphicon-user"></span>회원가입</a></li>
-          <li><a href="{% url "login" %}?next={{ request.path }}">
+          <li><a href="{% url "login" %}?next={% url "root" %}">
           <span class="glyphicon glyphicon-log-in"></span>로그인</a></li>
       </ul>
     {% else %}
+
 
         <li><a href="{% url "profile" %}">프로필</a></li>
         <li><a href="{% url "logout" %}?next={{ request.path }}">로그아웃</a></li>
@@ -60,6 +65,21 @@ $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
 });
 </script>
+
+  {% if messages %}
+  <div class="container">
+
+
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">
+      {{ message.tags }}
+      {{ message.message }}
+    {% endfor %}
+
+    </div>
+  </div>
+  {% endif %}
+
   {% block content %}
   {% endblock %}
 <hr />
