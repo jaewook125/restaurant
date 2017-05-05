@@ -25,7 +25,7 @@ SECRET_KEY = '5obv_-d&(w3_^&)*=c^w6q4%_+q39lsn*te(ocb%ar^y0knvh9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -128,5 +128,3 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-INTERNAL_IPS = ['127.0.0.1']
